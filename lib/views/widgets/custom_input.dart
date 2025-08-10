@@ -4,13 +4,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class CustomInput extends StatelessWidget {
   final String name;
   final String? labelText;
-
-  const CustomInput({super.key, required this.name, this.labelText});
+  final VoidCallback? action;
+  final String? initialValue;
+  const CustomInput({super.key, required this.name, this.labelText, this.action, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: name,
+      
       keyboardType: name == 'phone' || name == "spot" ? TextInputType.phone : TextInputType.text,
       decoration: InputDecoration(
         labelText: labelText ?? " ",
@@ -19,11 +21,14 @@ class CustomInput extends StatelessWidget {
         suffixIcon: name == 'license_plate'
             ? IconButton(
                 icon: const Icon(Icons.camera_alt, color: Color(0XFF0fc875)),
-                onPressed: () {},
+                onPressed: () {
+                  action != null ? action!() : null;
+                },
               )
             : null,
 
         filled: true,
+        counterText: initialValue ??"",
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

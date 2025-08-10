@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
+import 'package:smart_parking/controllers/image_controller.dart';
+import 'package:smart_parking/views/camera.dart';
 import 'package:smart_parking/views/widgets/custom_input.dart';
 
-class Checkin extends StatelessWidget {
-  const Checkin({super.key});
+class Checkin extends GetView {
+  final ImageController imageController = Get.put(ImageController());
+  Checkin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +55,41 @@ class Checkin extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // License Plate Input
-                      CustomInput(
-                        name: 'license_plate',
-                        labelText: 'License Plate',
+                      // Obx(()=>CustomInput(
+                      //   name: 'license_plate',
+                      //   initialValue: imageController.imagePath.value,
+                      //   labelText: 'License Plate',
+                      //   action: ()  {
+                      //     imageController.openCamera();
+                      //   }
+
+                      // ),
+                      // ),
+                      // Inside your Checkin widget, where you have the License Plate input
+                      Obx(
+                        () => CustomInput(
+                          name: 'license_plate',
+                          initialValue: imageController.imagePath.value,
+                          labelText: 'License Plate',
+                          action: () async {
+                            final plate = await Get.to(
+                              () => const CameraPage(),
+                            );
+                            if (plate != null) {
+                              imageController.imagePath.value = plate;
+                            }
+                          },
+                        ),
                       ),
+
                       SizedBox(height: 20),
-                      CustomInput(name: "cname",labelText: "Customer Name",),
+                      CustomInput(name: "cname", labelText: "Customer Name"),
                       const SizedBox(height: 25),
-                      CustomInput(name: "phone",labelText: "Phone Number",),
+                      CustomInput(name: "phone", labelText: "Phone Number"),
                       const SizedBox(height: 25),
-                      CustomInput(name: "spot",labelText: "Spot Number",),
+                      CustomInput(name: "spot", labelText: "Spot Number"),
                       const SizedBox(height: 25),
-                
+
                       // Check In Button
                       SizedBox(
                         width: double.infinity,
@@ -78,7 +105,7 @@ class Checkin extends StatelessWidget {
                           onPressed: () {
                             // Handle check-in logic
                           },
-                          
+
                           child: const Text(
                             'Check In',
                             style: TextStyle(fontSize: 18, color: Colors.white),
