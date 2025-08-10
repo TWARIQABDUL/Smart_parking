@@ -4,9 +4,11 @@ import 'package:smart_parking/views/widgets/custom_text.dart';
 class Custombutton extends StatelessWidget {
   final String content;
   final Color bgColor;
+  final VoidCallback? action;
   const Custombutton({
     required this.content,
     required this.bgColor,
+    this.action,
     super.key
   });
 
@@ -23,7 +25,7 @@ class Custombutton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 14),
           elevation: 3,
         ),
-        onPressed: () {},
+        onPressed: action ?? (){},
         child: CustomText(
           content: content,
           textColor: Colors.white,

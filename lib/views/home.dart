@@ -86,7 +86,11 @@ class Home extends GetView {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Custombutton(content: "Check In", bgColor: appColor),
+            Custombutton(content: "Check In", bgColor: appColor,
+              action: () {
+                Get.toNamed("/checkin");
+              },
+            ),
             const SizedBox(width: 10),
             Custombutton(content: "Check Out", bgColor: Colors.redAccent),
           ],
@@ -95,7 +99,7 @@ class Home extends GetView {
 
       const SizedBox(height: 10),
 
-      // Section Header
+
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
@@ -121,12 +125,36 @@ class Home extends GetView {
 
       const SizedBox(height: 6),
 
-      // List of Activities
-      const RecentActivity(),
+ 
+      const RecentActivity(
+        title: "Check In",
+        plateNumber: "ABC-1234",
+        status: true,
+        timeOut: "10:30 AM",
+        driverName: "John Doe",
+        amount: "\$20.00",
+        time: "1hr 12min",
+      ),
       const SizedBox(height: 10),
-      const RecentActivity(),
+      const RecentActivity(
+        title: "Check Out",
+        plateNumber: "XYZ-5678",
+        status: false,
+        timeOut: "11:00 AM",
+        driverName: "Jane Smith",
+        amount: "\$15.00",
+        time: "1hr 30min",
+      ),
       const SizedBox(height: 10),
-      const RecentActivity(),
+      const RecentActivity(
+        title: "Reservation",
+        plateNumber: "LMN-9012",
+        status: true,
+        time: "55min",
+        driverName: "Alice Johnson",
+        amount: "\$25.00",
+        timeOut: "12:30 PM",
+      ),
 
       const SizedBox(height: 10),
     ],

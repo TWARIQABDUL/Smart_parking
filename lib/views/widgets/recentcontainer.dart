@@ -3,7 +3,16 @@ import 'package:smart_parking/views/widgets/custom_text.dart';
 import 'package:smart_parking/utils/build_icon_circle.dart';
 
 class RecentActivity extends StatelessWidget {
-  const RecentActivity({super.key});
+  final String title;
+  final String plateNumber;
+  final bool status;
+  final String timeOut;
+
+  final String time;
+  final String driverName;
+  final String amount;
+
+  const RecentActivity({super.key, required this.title, required this.plateNumber, required this.status, required this.time, required this.driverName, required this.amount, required this.timeOut});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +46,12 @@ class RecentActivity extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        content: "Token#123",
+                        content: title,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
                       CustomText(
-                        content: "DHAKA-D-123L",
+                        content: plateNumber,
                         textColor: Colors.grey[700],
                         fontSize: 14,
                       ),
@@ -54,18 +63,18 @@ class RecentActivity extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CustomText(
-                    content: "Paid",
+                    content: status ? "Paid" : "Unpaid",
                     fontWeight: FontWeight.bold,
-                    textColor: Colors.green,
+                    textColor: status ? Colors.green : Colors.red,
                     fontSize: 14,
                   ),
                   CustomText(
-                    content: "Rwf 3,500",
+                    content: amount,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                   CustomText(
-                    content: "1hr 12min",
+                    content: time,
                     textColor: Colors.grey[700],
                     fontSize: 13,
                   ),
@@ -82,7 +91,7 @@ class RecentActivity extends StatelessWidget {
               buildIconCircle(Icons.timelapse_outlined, Colors.orange),
               const SizedBox(width: 8),
               CustomText(
-                content: "10:40 AM",
+                content: timeOut,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
@@ -90,7 +99,7 @@ class RecentActivity extends StatelessWidget {
               buildIconCircle(Icons.person_2_outlined, Colors.blue),
               const SizedBox(width: 8),
               CustomText(
-                content: "Abdulazizi",
+                content: driverName,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
